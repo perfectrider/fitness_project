@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+<hr>
+
+{% for el in articles %}
+<div class="card">
+  <div class="card-header">
+    Кто разместил, {{ el.time_create }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ el.title }}</h5>
+    <p class="card-text">{{ el.content }}</p>
+
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
