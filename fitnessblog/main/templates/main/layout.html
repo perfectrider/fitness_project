@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <head>
     <meta charset="UTF-8">
@@ -16,8 +17,8 @@
   <div class="row">
     <div class="col">
         <div class="d-grid gap-2 d-md-block">
-            <a href="/" class="btn btn-primary btn-sm">Главная</a>
-            <a href="about" class="btn btn-primary btn-sm">Обо мне</a>
+            <a href="{% url 'Главная' %}" class="btn btn-primary btn-sm">Главная</a>
+            <a href="{% url 'Обо мне' %}" class="btn btn-primary btn-sm">Обо мне</a>
        </div>
     </div>
     <div class="col-md-auto">
