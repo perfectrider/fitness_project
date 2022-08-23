@@ -25,5 +25,8 @@ class ArticlesDetailView(DetailView):
     context_object_name = 'article'
     title = Article.title
 
+    # def ArticlesDetailView(request, article_id):
+    #     article = get_object_or_404(Article, pk=article_id)
+
 def pageNotFound(request, exception):
     return HttpResponseNotFound('Такой страницы не существует!')
