@@ -1,5 +1,5 @@
 from django.http import HttpResponseNotFound, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
 from main.forms import *
@@ -20,7 +20,11 @@ def addarticle(request):
     if request.method == 'POST':
         form = AddArticleForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            try:
+                Article.objects.create(**form.cleaned_data)
+                return redirect('Главная')
+            except:
+                form.add_error(None, 'Пост не добавлен!')
     else:
         form = AddArticleForm()
     return render(request, 'main/addarticle.html',
