@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import PROTECT
+from django.urls import reverse
+
 
 class Article(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название статьи')
@@ -19,6 +21,9 @@ class Article(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         ordering = ['-time_create']
+
+    def get_absolute_url(self):
+        return reverse('getlink:article_detail', kwargs={'slug': self.slug})
 
 class Category(models.Model):
     '''Модель, определяющая название категории статей,

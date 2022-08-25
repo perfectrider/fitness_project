@@ -13,7 +13,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ el.title }}</h5>
     <p class="card-text">{{ el.content|truncatewords:25 }}</p>
-    <a href="{% url 'article_detail' el.id %}" class="btn btn-primary btn-sm">Открыть статью полностью</a>
+    <a href="{% url 'article_detail' el.slug %}" class="btn btn-primary btn-sm">Открыть статью полностью</a>
   </div>
 </div>
 {% endfor %}
