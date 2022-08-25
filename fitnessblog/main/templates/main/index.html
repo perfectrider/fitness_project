@@ -6,6 +6,9 @@
 <hr>
 
 {% for el in articles %}
+
+{% if el.is_published %}
+
 <div class="card">
   <div class="card-header">
     Кто разместил, {{ el.time_create }}
@@ -16,6 +19,10 @@
     <a href="{% url 'article_detail' el.slug %}" class="btn btn-primary btn-sm">Открыть статью полностью</a>
   </div>
 </div>
+
+{% endif %}
+
 {% endfor %}
+
 
 {% endblock %}
