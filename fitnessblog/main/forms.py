@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import *
 
 class AddArticleForm(forms.ModelForm):
@@ -12,5 +14,5 @@ class AddArticleForm(forms.ModelForm):
         fields = ['title', 'slug', 'content', 'is_published', 'image', 'category']
         widgets = {
             'content': forms.Textarea(attrs={'cols': 120, 'rows': 10}),
-
         }
+

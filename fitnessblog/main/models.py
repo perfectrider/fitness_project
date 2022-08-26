@@ -4,6 +4,8 @@ from django.urls import reverse
 
 
 class Article(models.Model):
+    '''Модель, определяющая все параметры статьи.'''
+
     title = models.CharField(max_length=250, verbose_name='Название статьи')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     content = models.TextField(blank=True, verbose_name='Текст')
@@ -23,7 +25,7 @@ class Article(models.Model):
         ordering = ['-time_create']
 
     def get_absolute_url(self):
-        return reverse('getlink:article_detail', kwargs={'slug': self.slug})
+        return reverse(kwargs={'slug': self.slug})
 
 class Category(models.Model):
     '''Модель, определяющая название категории статей,
