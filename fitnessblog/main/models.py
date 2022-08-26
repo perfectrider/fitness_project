@@ -7,12 +7,12 @@ class Article(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название статьи')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     content = models.TextField(blank=True, verbose_name='Текст')
-    image = models.ImageField(upload_to='images/', verbose_name='Изображение')
+    image = models.ImageField(upload_to='images/', blank=True, verbose_name='Изображение')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Отредактировано')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     # добавил ключ для связи с таблицей категорий
-    category = models.ForeignKey('Category', on_delete=PROTECT)
+    category = models.ForeignKey('Category', on_delete=PROTECT, verbose_name='Категория')
 
     def __str__(self):
         return self.title

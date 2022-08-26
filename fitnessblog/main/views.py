@@ -18,13 +18,10 @@ def about(request):
 
 def addarticle(request):
     if request.method == 'POST':
-        form = AddArticleForm(request.POST)
+        form = AddArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                Article.objects.create(**form.cleaned_data)
-                return redirect('Главная')
-            except:
-                form.add_error(None, 'Пост не добавлен!')
+            form.save()
+            return redirect('Главная')
     else:
         form = AddArticleForm()
     return render(request, 'main/addarticle.html',
