@@ -1,14 +1,15 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
-
 from main.forms import *
 from main.models import *
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class MainPage(ListView):
     '''Класс отображения главной страницы'''
 
+    paginate_by = 4
     model = Article
     template_name = 'main/index.html'
     context_object_name = 'articles'
@@ -40,11 +41,15 @@ class AboutPage(TemplateView):
 #               {'title': 'Обо мне'})
 
 
-class AddArticle(CreateView):
+class AddArticle(LoginRequiredMixin, CreateView):
     '''Класс добавления статьи через форму'''
 
     form_class = AddArticleForm
     template_name = 'main/addarticle.html'
+    login_url = 'admin/'
+    extra_context = {'title': 'Добавить статью'}
+
+
 
 # def addarticle(request):
 #     # Старый вариант Функции добавления статьи через форму ввода
