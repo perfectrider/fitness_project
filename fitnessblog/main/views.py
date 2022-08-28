@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from main.forms import *
 from main.models import *
 
+
 class MainPage(ListView):
     '''Класс отображения главной страницы'''
 
@@ -17,8 +18,9 @@ class MainPage(ListView):
         # Функция отображения только опубликованных статей
         return Article.objects.filter(is_published=True)
 
+
 # def index(request):
-    # Функция отображения главной страницы (старый вариант)
+# Функция отображения главной страницы (старый вариант)
 #     articles = Article.objects.order_by('-time_create')
 #     return render(request, 'main/index.html',
 #                   {'articles': articles,
@@ -31,10 +33,11 @@ class AboutPage(TemplateView):
     context_object_name = 'Обо мне'
     extra_context = {'title': 'Эта страница обо мне'}
 
+
 # def about(request):
-    # Фукнция отображения страницы обо мне (старый вариант
-    # return render(request, 'main/about.html',
-    #               {'title': 'Обо мне'})
+# Фукнция отображения страницы обо мне (старый вариант
+# return render(request, 'main/about.html',
+#               {'title': 'Обо мне'})
 
 
 def addarticle(request):
@@ -48,8 +51,8 @@ def addarticle(request):
     else:
         form = AddArticleForm()
     return render(request, 'main/addarticle.html',
-            {'form': form,
-             'title': 'Добавить статью'})
+                  {'form': form,
+                   'title': 'Добавить статью'})
 
 
 class ArticlesDetailView(DetailView):
