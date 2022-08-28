@@ -25,7 +25,7 @@ class Article(models.Model):
         ordering = ['-time_create']
 
     def get_absolute_url(self):
-        return reverse(kwargs={'slug': self.slug})
+        return reverse('article_detail', kwargs={'slug': self.slug})
 
 
 class Category(models.Model):

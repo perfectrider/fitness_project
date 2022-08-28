@@ -1,6 +1,6 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView
 
 from main.forms import *
 from main.models import *
@@ -40,19 +40,25 @@ class AboutPage(TemplateView):
 #               {'title': 'Обо мне'})
 
 
-def addarticle(request):
-    # Функция добавления статьи через форму ввода
+class AddArticle(CreateView):
+    '''Класс добавления статьи через форму'''
 
-    if request.method == 'POST':
-        form = AddArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('Главная')
-    else:
-        form = AddArticleForm()
-    return render(request, 'main/addarticle.html',
-                  {'form': form,
-                   'title': 'Добавить статью'})
+    form_class = AddArticleForm
+    template_name = 'main/addarticle.html'
+
+# def addarticle(request):
+#     # Старый вариант Функции добавления статьи через форму ввода
+#
+#     if request.method == 'POST':
+#         form = AddArticleForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Главная')
+#     else:
+#         form = AddArticleForm()
+#     return render(request, 'main/addarticle.html',
+#                   {'form': form,
+#                    'title': 'Добавить статью'})
 
 
 class ArticlesDetailView(DetailView):
