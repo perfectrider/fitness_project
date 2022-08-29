@@ -86,9 +86,6 @@ class RegisterUser(CreateView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    class Meta:
-        model = User
-
 
 def pageNotFound(request, exception):
     # Обработка исключения 404
