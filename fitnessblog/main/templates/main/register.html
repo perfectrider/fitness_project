@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="btn btn-primary btn-sm">Регистрация</button>
+
+</form>
+
+{% endblock %}
