@@ -1,5 +1,7 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponseNotFound
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from main.forms import *
 from main.models import *
@@ -50,7 +52,6 @@ class AddArticle(LoginRequiredMixin, CreateView):
     extra_context = {'title': 'Добавить статью'}
 
 
-
 # def addarticle(request):
 #     # Старый вариант Функции добавления статьи через форму ввода
 #
@@ -73,6 +74,20 @@ class ArticlesDetailView(DetailView):
     template_name = 'main/article.html'
     context_object_name = 'article'
     title = Article.title
+
+
+class RegisterUser(CreateView):
+    '''Регистрация пользователя на сайте'''
+
+    form_class = UserCreationForm
+    template_name = 'main/register.html'
+    success_url = reverse_lazy('login')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = User
 
 
 def pageNotFound(request, exception):
