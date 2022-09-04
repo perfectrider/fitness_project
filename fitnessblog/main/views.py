@@ -1,6 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import logout, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseNotFound
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView, CreateView
 from main.forms import *
@@ -51,6 +53,9 @@ class AddArticle(LoginRequiredMixin, CreateView):
     login_url = 'admin/'
     extra_context = {'title': 'Добавить статью'}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
 
 # def addarticle(request):
 #     # Старый вариант Функции добавления статьи через форму ввода
@@ -79,12 +84,29 @@ class ArticlesDetailView(DetailView):
 class RegisterUser(CreateView):
     '''Регистрация пользователя на сайте'''
 
-    form_class = UserCreationForm
+    form_class = RegisterUserForm
     template_name = 'main/register.html'
     success_url = reverse_lazy('login')
+    extra_context = {'title': 'Регистрация'}
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('Главная')
+
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'main/login.html'
+    extra_context = {'title': 'Авторизация'}
+
+    def get_success_url(self):
+        return reverse_lazy('Главная')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
 
 
 def pageNotFound(request, exception):

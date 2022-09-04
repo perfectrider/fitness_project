@@ -27,16 +27,21 @@
 
     <div class="col-md-auto">
 
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Вход | регистрация
-          </a>
+        {% if request.user.is_authenticated %}
+            <p>Привет, {{ user.username }}! | <a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Выйти</a></p>
 
+        {% else %}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Вход | регистрация
+            </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'login' %}">Вход</a></li>
             <li><a class="dropdown-item" href="{% url 'register' %}">Регистрация</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Выход</a></li>
           </ul>
+
+        {% endif %}
 
     </div>
   </div>
