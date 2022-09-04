@@ -2,6 +2,8 @@ from django.contrib.auth import login
 from django.urls import path
 from . import views
 from .views import LoginUser, logout_user
+from django.views.decorators.cache import cache_page
+
 
 urlpatterns = [
     path('', views.MainPage.as_view(), name='Главная'),

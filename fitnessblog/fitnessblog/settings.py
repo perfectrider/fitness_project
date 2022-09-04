@@ -134,6 +134,14 @@ MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Кэш и его запись в память:
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#         'LOCATION': os.path.join(BASE_DIR, 'fitnessblog_cache'),
+#     }
+# }
+
 # INTERNAL_IPS = [
 #     '127.0.0.1',
 # ]
