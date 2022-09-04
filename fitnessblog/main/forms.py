@@ -1,12 +1,14 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
+from captcha.fields import CaptchaField
 from .models import *
 
 
 class AddArticleForm(forms.ModelForm):
     '''Новый вариант класса, наследующий поля модели Article'''
+
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
