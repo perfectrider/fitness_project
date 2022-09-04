@@ -50,7 +50,7 @@ class AddArticle(LoginRequiredMixin, CreateView):
 
     form_class = AddArticleForm
     template_name = 'main/addarticle.html'
-    login_url = 'admin/'
+    login_url = 'login'
     extra_context = {'title': 'Добавить статью'}
 
     def __init__(self, *args, **kwargs):
