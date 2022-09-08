@@ -13,4 +13,6 @@ urlpatterns = [
     path('register', views.RegisterUser.as_view(), name='register'),
     path('logout', logout_user, name='logout'),
     path('<slug:slug>', views.ArticlesDetailView.as_view(), name='article_detail'),
+    path('<slug:slug>/update/', views.ArticlesUpdate.as_view(), name='update_article'),
+    path('<slug:slug>/delete/', views.ArticlesDelete.as_view(), name='delete_article'),
 ]

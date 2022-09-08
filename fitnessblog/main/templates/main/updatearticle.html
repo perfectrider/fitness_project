@@ -1,23 +1,17 @@
 {% extends 'main/layout.html' %}
 
 {% block content %}
-<h1>{{ title }}</h1>
+<h1>Редактировать статью</h1>
 <hr>
 
-<form action="{% url 'Добавить статью' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    <div class="input-group input-group-sm mb-3">{{ form.non_field_errors }}</div>
-
+<form action="#" method="post" enctype="multipart/form-data">
 {% for f in form %}
 <div class="input-group input-group-sm mb-3">
     <span class="input-group-text" type="checkbox" id="inputGroup-sizing-sm" for="{{ f.id_for_label }}">{{f.label}}: </span>{{ f }}
 </div>
-    {{ value|slugify }}
 <div class="form-error">{{ f.errors }}</div>
 {% endfor %}
-
-    <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+    <button type="submit" class="btn btn-primary btn-sm">Редактировать</button>
 </form>
 
 {% endblock %}

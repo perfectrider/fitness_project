@@ -20,7 +20,11 @@
         <div class="d-grid gap-2 d-md-block">
 
             <a href="{% url 'Главная' %}" class="btn btn-primary btn-sm">Главная</a>
+
+            {% if user.is_superuser %}
             <a href="{% url 'Добавить статью' %}" class="btn btn-primary btn-sm">Добавить статью</a>
+            {% endif %}
+
             <a href="{% url 'Обо мне' %}" class="btn btn-primary btn-sm">Обо мне</a>
        </div>
 
@@ -29,7 +33,7 @@
     <div class="col-md-auto">
 
         {% if request.user.is_authenticated %}
-            <p>Привет, {{ user.username }}! | <a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Выйти</a></p>
+            <p align="center">Привет, {{ user.username }}! | <a href="{% url 'logout' %}">Выйти</a></p>
 
         {% else %}
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

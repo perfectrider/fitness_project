@@ -1,10 +1,9 @@
 from django.contrib.auth import logout, login
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView, CreateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView, DeleteView, UpdateView
 from main.forms import *
 from main.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,25 +23,12 @@ class MainPage(ListView):
         return Article.objects.filter(is_published=True)
 
 
-# def index(request):
-# Функция отображения главной страницы (старый вариант)
-#     articles = Article.objects.order_by('-time_create')
-#     return render(request, 'main/index.html',
-#                   {'articles': articles,
-#                    'title': 'Фитнес блог'})
-
 class AboutPage(TemplateView):
     '''Класс отображения страницы обо мне'''
 
     template_name = 'main/about.html'
     context_object_name = 'Обо мне'
     extra_context = {'title': 'Эта страница обо мне'}
-
-
-# def about(request):
-# Фукнция отображения страницы обо мне (старый вариант
-# return render(request, 'main/about.html',
-#               {'title': 'Обо мне'})
 
 
 class AddArticle(LoginRequiredMixin, CreateView):
@@ -57,21 +43,6 @@ class AddArticle(LoginRequiredMixin, CreateView):
         super().__init__(*args, **kwargs)
 
 
-# def addarticle(request):
-#     # Старый вариант Функции добавления статьи через форму ввода
-#
-#     if request.method == 'POST':
-#         form = AddArticleForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('Главная')
-#     else:
-#         form = AddArticleForm()
-#     return render(request, 'main/addarticle.html',
-#                   {'form': form,
-#                    'title': 'Добавить статью'})
-
-
 class ArticlesDetailView(DetailView):
     '''Отдельное окно для полного просмотра статьи'''
 
@@ -79,6 +50,23 @@ class ArticlesDetailView(DetailView):
     template_name = 'main/article.html'
     context_object_name = 'article'
     title = Article.title
+
+
+class ArticlesUpdate(UpdateView):
+    '''Редактирование статьи'''
+
+    model = Article
+    template_name = 'main/updatearticle.html'
+    success_url = reverse_lazy('article_detail')
+    fields = ['title', 'content', 'image', 'is_published']
+
+
+class ArticlesDelete(DeleteView):
+    '''Удаление статьи'''
+
+    model = Article
+    template_name = 'main/deletearticle.html'
+    success_url = reverse_lazy('Главная')
 
 
 class RegisterUser(CreateView):
