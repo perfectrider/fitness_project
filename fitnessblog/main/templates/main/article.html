@@ -22,8 +22,35 @@
 </div>
 
 {% if user.is_superuser %}
-<a href="{% url 'update_article' article.slug %}" class="btn btn-primary btn-sm">Редактировать</a>
-<a href="{% url 'delete_article' article.slug %}" class="btn btn-primary btn-sm">Удалить</a>
+<div class="container" align="right" style="margin-top: 3px">
+  <a href="{% url 'update_article' article.slug %}" class="btn btn-outline-secondary btn-sm">Редактировать</a>
+  <a href="{% url 'delete_article' article.slug %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+</div>
+{% endif %}
+
+
+<p align="center"><em>Комментарии:</em></p>
+
+{% if article.comments_articles %}
+ {% for el in article.comments_articles.all %}
+  {{ el.author }}
+  {{ el.time_create }}
+  {{ el.comment }}
+ {% endfor %}
+
+{% else %}
+<p align="center"><em>Комментарии:</em></p>
+
+{% endif %}
+
+
+{% if user.is_active %}
+<form method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+  <div class="form-error">{{ form.errors }}</div>
+    <input type="submit" class="btn btn-outline-secondary btn-sm" value="Добавить коммент">
+</form>
 {% endif %}
 
 {% endblock %}

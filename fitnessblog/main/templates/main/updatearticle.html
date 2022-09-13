@@ -5,6 +5,8 @@
 <hr>
 
 <form action="#" method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+
 {% for f in form %}
 <div class="input-group input-group-sm mb-3">
     <span class="input-group-text" type="checkbox" id="inputGroup-sizing-sm" for="{{ f.id_for_label }}">{{f.label}}: </span>{{ f }}

@@ -8,7 +8,6 @@ from .models import *
 class AddArticleForm(forms.ModelForm):
     '''Новый вариант класса, наследующий поля модели Article'''
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Категория не выбрана'
@@ -45,3 +44,18 @@ class LoginUserForm(AuthenticationForm):
 
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+class CommentForm(forms.ModelForm):
+    '''Создание комментирия под постом'''
+
+    comment = forms.CharField(widget=forms.Textarea(attrs={
+        'rows': '3',
+    }))
+
+    class Meta:
+        model = Comments
+        fields = ('comment',)
+
+
+

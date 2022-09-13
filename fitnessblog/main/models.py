@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import PROTECT
 from django.urls import reverse
@@ -15,6 +16,7 @@ class Article(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     # добавил ключ для связи с таблицей категорий
     category = models.ForeignKey('Category', on_delete=PROTECT, verbose_name='Категория')
+
 
     def __str__(self):
         return self.title
@@ -42,3 +44,26 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
         ordering = ['id']
 
+
+class Comments(models.Model):
+    '''Комментарии под постом.'''
+
+    comment = models.TextField(blank=True, verbose_name='Введите текст комментария', )
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Создан комментарий')
+    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Автор')
+    article = models.ForeignKey(Article,
+                                blank=True,
+                                null=True,
+                                on_delete=models.CASCADE,
+                                related_name='comments_articles',
+                                verbose_name='Статья')
+
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ['time_create']
+
+    def __str__(self):
+        return self.comment

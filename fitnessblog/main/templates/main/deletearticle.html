@@ -1,12 +1,14 @@
 {% extends 'main/layout.html' %}
 
 {% block content %}
-<h1>Удалить статью</h1>
-<hr>
+<h3 align="center">Удалить статью: {{ article.title }}?</h3>
 
-<form action="#" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
-</form>
+<div class="container" align="center">
+    <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <a href="#" class="btn btn-primary btn-sm" onclick="history.back();">Отмена</a>
+        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+    </form>
+</div>
 
 {% endblock %}

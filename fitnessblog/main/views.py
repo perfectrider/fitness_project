@@ -1,9 +1,11 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseNotFound
-from django.shortcuts import redirect
+from django.http import HttpResponseNotFound, HttpResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, DeleteView, UpdateView
+from django.views.generic.edit import FormMixin
+
 from main.forms import *
 from main.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -43,13 +45,18 @@ class AddArticle(LoginRequiredMixin, CreateView):
         super().__init__(*args, **kwargs)
 
 
-class ArticlesDetailView(DetailView):
+class ArticlesDetailView(FormMixin, DetailView):
     '''Отдельное окно для полного просмотра статьи'''
 
     model = Article
     template_name = 'main/article.html'
     context_object_name = 'article'
     title = Article.title
+    form_class = CommentForm
+
+    def comments(request):
+        comments = Comments.objects.all()
+        return render(request, 'main/article.html', {'comments': comments})
 
 
 class ArticlesUpdate(UpdateView):
@@ -57,7 +64,7 @@ class ArticlesUpdate(UpdateView):
 
     model = Article
     template_name = 'main/updatearticle.html'
-    success_url = reverse_lazy('article_detail')
+    success_url = reverse_lazy('Главная')
     fields = ['title', 'content', 'image', 'is_published']
 
 
@@ -95,6 +102,26 @@ class LoginUser(LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+# class CommentForm(LoginRequiredMixin, CreateView):
+#     '''Добавление комментария'''
+#
+#     form_class = CommentForm
+#     template_name = 'main/article.html'
+#     login_url = 'login'
+#     fields = ['comment']
+#
+#
+# class ShowComment(ListView):
+#     '''Просмотр комментария'''
+#
+#     model = Comments
+#     context_object_name = 'comments'
+#     template_name = 'main/article.html'
+#
+#     def get_queryset(self):
+#         return Comments.objects.filter(is_published=True)
 
 
 def pageNotFound(request, exception):
