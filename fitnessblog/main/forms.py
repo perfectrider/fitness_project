@@ -49,8 +49,10 @@ class LoginUserForm(AuthenticationForm):
 class CommentForm(forms.ModelForm):
     '''Создание комментирия под постом'''
 
-    comment = forms.CharField(widget=forms.Textarea(attrs={
-        'rows': '3',
+    comment = forms.CharField(label='', widget=forms.Textarea(attrs={
+        'rows': '2',
+        'class': 'form-control',
+        'placeholder': 'Введите комментарий сюда'
     }))
 
     class Meta:

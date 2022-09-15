@@ -54,10 +54,22 @@ class ArticlesDetailView(FormMixin, DetailView):
     title = Article.title
     form_class = CommentForm
 
-    def comments(request):
-        comments = Comments.objects.all()
-        return render(request, 'main/article.html', {'comments': comments})
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('article_detail', kwargs={'slug': self.get_object().slug})
 
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.article = self.get_object()
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 class ArticlesUpdate(UpdateView):
     '''Редактирование статьи'''

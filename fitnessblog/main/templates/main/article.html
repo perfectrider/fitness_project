@@ -2,8 +2,7 @@
 
 {% block content %}
 
-<h1>{{ article.title }}</h1>
-<hr>
+<h1 align="center">{{ article.title }}</h1>
 
 <div class="card">
   <div class="card-header">
@@ -31,26 +30,31 @@
 
 <p align="center"><em>Комментарии:</em></p>
 
-{% if article.comments_articles %}
- {% for el in article.comments_articles.all %}
-  {{ el.author }}
-  {{ el.time_create }}
-  {{ el.comment }}
+{% for el in article.comments_articles.all %}
+<figure>
+  <blockquote class="blockquote">
+    <p>{{ el.comment }}</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    {{ el.time_create }}, <cite title="Source Title">{{ el.author }}</cite>
+  </figcaption>
+</figure>
  {% endfor %}
-
-{% else %}
-<p align="center"><em>Комментарии:</em></p>
-
-{% endif %}
 
 
 {% if user.is_active %}
+<hr>
 <form method="post">
   {% csrf_token %}
     {{ form.as_p }}
   <div class="form-error">{{ form.errors }}</div>
-    <input type="submit" class="btn btn-outline-secondary btn-sm" value="Добавить коммент">
+    <input type="submit" class="btn btn-outline-secondary btn-sm" value="Добавить">
 </form>
+
+{% else %}
+<p align="center"><em>Чтобы оставлять комментарии, необходимо авторизоваться!</em></p>
+
 {% endif %}
+
 
 {% endblock %}
