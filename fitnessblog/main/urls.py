@@ -1,4 +1,3 @@
-from django.contrib.auth import login
 from django.urls import path
 from . import views
 from .views import LoginUser, logout_user

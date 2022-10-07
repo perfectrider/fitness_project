@@ -17,7 +17,6 @@ class Article(models.Model):
     # добавил ключ для связи с таблицей категорий
     category = models.ForeignKey('Category', on_delete=PROTECT, verbose_name='Категория')
 
-
     def __str__(self):
         return self.title
 
@@ -58,7 +57,6 @@ class Comments(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='comments_articles',
                                 verbose_name='Статья')
-
 
     class Meta:
         verbose_name = 'Комментарий'

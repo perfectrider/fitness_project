@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
 from .models import *
 
@@ -47,7 +46,7 @@ class LoginUserForm(AuthenticationForm):
 
 
 class CommentForm(forms.ModelForm):
-    '''Создание комментирия под постом'''
+    '''Создание комментария под постом'''
 
     comment = forms.CharField(label='', widget=forms.Textarea(attrs={
         'rows': '2',

@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-=0%)8(j(*vdbf(!dw27w59vt(lxmrm+#i3nd_b#8%kajs89la#
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['perfectride.ru', 'www.perfectride.ru']
 
 
 # Application definition
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'fitnessblog.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.1/ref/settings/databases
 
 DATABASES = {
     'default': {

@@ -1,7 +1,7 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseNotFound, HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpResponseNotFound
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, DeleteView, UpdateView
 from django.views.generic.edit import FormMixin
@@ -71,6 +71,7 @@ class ArticlesDetailView(FormMixin, DetailView):
         self.object.save()
         return super().form_valid(form)
 
+
 class ArticlesUpdate(UpdateView):
     '''Редактирование статьи'''
 
@@ -114,26 +115,6 @@ class LoginUser(LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
-
-
-# class CommentForm(LoginRequiredMixin, CreateView):
-#     '''Добавление комментария'''
-#
-#     form_class = CommentForm
-#     template_name = 'main/article.html'
-#     login_url = 'login'
-#     fields = ['comment']
-#
-#
-# class ShowComment(ListView):
-#     '''Просмотр комментария'''
-#
-#     model = Comments
-#     context_object_name = 'comments'
-#     template_name = 'main/article.html'
-#
-#     def get_queryset(self):
-#         return Comments.objects.filter(is_published=True)
 
 
 def pageNotFound(request, exception):

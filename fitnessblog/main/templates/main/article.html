@@ -30,16 +30,16 @@
 
 <p align="center"><em>Комментарии:</em></p>
 
-{% for el in article.comments_articles.all %}
-<figure>
-  <blockquote class="blockquote">
-    <p>{{ el.comment }}</p>
-  </blockquote>
-  <figcaption class="blockquote-footer">
-    {{ el.time_create }}, <cite title="Source Title">{{ el.author }}</cite>
-  </figcaption>
-</figure>
- {% endfor %}
+  {% for el in article.comments_articles.all %}
+  <figure>
+    <blockquote class="blockquote">
+      <p>{{ el.comment }}</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      {{ el.time_create }}, <cite title="Source Title">{{ el.author }}</cite>
+    </figcaption>
+  </figure>
+  {% endfor %}
 
 
 {% if user.is_active %}
