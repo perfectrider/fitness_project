@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-=0%)8(j(*vdbf(!dw27w59vt(lxmrm+#i3nd_b#8%kajs89la#
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['perfectride.ru', 'www.perfectride.ru']
+ALLOWED_HOSTS = []
 
 
 # Application definition
