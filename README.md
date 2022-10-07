@@ -29,7 +29,11 @@ source python/python-x.x.x/bin/python/activate
 
 3. Next, you need to install the django package at least the version specified in the file fitnessblog/requirements.txt (Django 4.1.2)
 
-pip install django   or   pip install django==4.1.2
+pip install django   
+
+or   
+
+pip install django==4.1.2
 
 4. The next step to install the dependencies from the requirements.txt file. To do this, you need to run the command:
 
@@ -37,4 +41,4 @@ pip install -r fitnessblog/requirements.txt
 
 5. To run the local server and test the project, you need run command:
 
-python3 fitnessblog/manage.py runserver   or   python3 fitnessblog/manage.py runserver (for windows os)
+python3 fitnessblog/manage.py runserver   
