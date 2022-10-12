@@ -30,7 +30,7 @@ class AboutPage(TemplateView):
 
     template_name = 'main/about.html'
     context_object_name = 'Обо мне'
-    extra_context = {'title': 'Эта страница обо мне'}
+    extra_context = {'title': 'Обо мне. Ссылки'}
 
 
 class AddArticle(LoginRequiredMixin, CreateView):

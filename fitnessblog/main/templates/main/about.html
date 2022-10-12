@@ -1,7 +1,32 @@
 {% extends 'main/layout.html' %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<hr>
-<p>Эта страница обо мне</p>
+
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">Проект собран на базе фреймворка Django 4.1.2</p>
+    <p class="card-text">Cсылки:</p>
+
+    <div class="d-md-block">
+
+      <a href="https://github.com/perfectrider/fitness_project" target="_blank">
+        <img src="static/main/images/github.png" width="32" title="GitHub, и исходный код проекта"></a>
+
+      <a href="https://www.linkedin.com/in/konstantin-grebenev/" target="_blank">
+        <img src="static/main/images/linkedin.png" width="32" title="Linkedin"></a>
+
+      <a href="https://www.instagram.com/konstantin_fit/" target="_blank">
+        <img src="static/main/images/instagram.png" width="32" title="Instagram"></a>
+
+    </div>
+
+  </div>
+
+  <div class="card-footer text-muted" align="right">
+    Konstantin Grebenev, 2022
+  </div>
+
+</div>
+
 {% endblock %}
